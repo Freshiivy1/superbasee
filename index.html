@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en-AU" class="promo-on">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0B0D11">
+<title>Superbrass</title>
+<meta name="description" content="Superbrass builds websites, free until 17 February 2027 and then $150 each, and apps for the App Store and Google Play for $300. Backend hosting from $35 a month.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Layout: one dark page with a colourless header. Each offer owns one accent
+     (blue websites, coral apps, brass backend hosting). The hero quote card is a live price calculator. */
+  --bg:#0B0D11;
+  --surface:#13161C;
+  --line:#262B35;
+  --text:#F4F5F7;
+  --muted:#A3AAB8;
+  --web:#6BA8FF;
+  --app:#FF8B68;
+  --brass:#E2B354;
+  --font-display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --font-body:"Instrument Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none !important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+svg{max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--font-display);font-weight:700;line-height:1.08;letter-spacing:-0.015em;margin:0;text-wrap:balance}
+p{margin:0}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;z-index:30;background:var(--text);color:var(--bg);padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:600}
+.skip:focus{top:12px}
+:focus-visible{outline:2px solid var(--text);outline-offset:3px}
+.promo-off [data-promo="on"],.promo-on [data-promo="off"]{display:none !important}
+
+/* Launch ribbon */
+.ribbon{background:var(--surface);border-bottom:1px solid var(--line);font-size:.875rem}
+.ribbon .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;padding-top:9px;padding-bottom:9px}
+.ribbon b{color:var(--web);font-weight:600}
+.chip-days{font-family:var(--font-mono);font-size:.75rem;border:1px solid var(--line);border-radius:999px;padding:2px 9px;color:var(--muted)}
+.ribbon a{margin-left:auto;font-weight:600;text-underline-offset:3px}
+
+/* Header */
+.top{position:sticky;top:0;z-index:20;background:rgba(11,13,17,.88);-webkit-backdrop-filter:saturate(140%) blur(12px);backdrop-filter:saturate(140%) blur(12px);border-bottom:1px solid var(--line)}
+.top-in{display:flex;align-items:center;gap:24px;min-height:64px}
+.brand{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:700;font-size:1.2rem;letter-spacing:-0.01em;text-decoration:none;color:var(--text)}
+.brand svg{width:22px;height:22px;flex:none;color:var(--brass)}
+.nav{display:none;gap:24px;margin-left:auto;font-size:.95rem}
+.nav a{text-decoration:none;color:var(--muted)}
+.nav a:hover{color:var(--text)}
+.top .btn{margin-left:auto}
+@media (min-width:820px){.nav{display:flex}.top .btn{margin-left:8px}}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:11px 22px;border-radius:999px;border:1px solid transparent;font:600 .975rem/1.2 var(--font-body);text-align:center;text-decoration:none;cursor:pointer;transition:transform .15s ease,background-color .15s ease,border-color .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-sm{min-height:38px;padding:8px 16px;font-size:.9rem}
+.btn-white{background:var(--text);color:var(--bg)}
+.btn-ghost{background:transparent;color:var(--text);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--muted)}
+.btn-accent{background:var(--accent);color:var(--bg)}
+.btn-line{background:transparent;color:var(--accent);border-color:var(--line);border-color:color-mix(in srgb,var(--accent) 55%,transparent)}
+.btn-line:hover{border-color:var(--accent)}
+.btn-block{width:100%}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+#stars{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,#000 25%,transparent 95%);mask-image:linear-gradient(to bottom,#000 25%,transparent 95%)}
+.hero-grid{position:relative;display:grid;gap:40px;padding-top:48px;padding-bottom:56px}
+@media (min-width:920px){.hero-grid{grid-template-columns:1.12fr .88fr;align-items:center;gap:64px;padding-top:76px;padding-bottom:84px}}
+.eyebrow{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-size:clamp(2.35rem,5.6vw,4.3rem);font-weight:800;line-height:1.02;letter-spacing:-0.028em;margin:16px 0 20px}
+.lede{font-size:1.125rem;color:var(--muted);max-width:56ch}
+.lede strong{color:var(--text);font-weight:600}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.assure{display:flex;flex-wrap:wrap;gap:8px 18px;margin:22px 0 0;padding:0;list-style:none;font-size:.875rem;color:var(--muted)}
+.assure li{display:flex;align-items:center;gap:8px}
+.assure li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--muted)}
+
+/* Quote card */
+.quote{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:6px 20px 20px;box-shadow:0 24px 70px rgba(0,0,0,.45)}
+.quote-head{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0 12px;border-bottom:1px solid var(--line)}
+.quote-head h2{font-size:1.1rem;letter-spacing:0}
+.quote-head span{font-family:var(--font-mono);font-size:.75rem;color:var(--muted)}
+.q-line{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:14px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.q-line input{width:18px;height:18px;margin:0;accent-color:var(--accent)}
+.q-name{font-weight:600}
+.q-name small{display:block;font-weight:400;color:var(--muted);font-size:.8rem;margin-top:2px}
+.q-price{font-family:var(--font-mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.q-price s{color:var(--muted);margin-right:8px;font-size:.85em}
+.q-sb{padding:14px 0;border-bottom:1px dashed var(--line)}
+.q-sb legend{font-weight:600;padding:0;margin-bottom:10px}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg label{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:54px;padding:6px 4px;border:1px solid var(--line);border-radius:10px;font-size:.82rem;font-weight:600;text-align:center;cursor:pointer}
+.seg label span{font-family:var(--font-mono);font-weight:400;font-size:.72rem;color:var(--muted)}
+.seg input:checked+label{border-color:var(--brass);background:rgba(226,179,84,.12)}
+.seg input:checked+label span{color:var(--brass)}
+.seg input:focus-visible+label{outline:2px solid var(--text);outline-offset:2px}
+.q-totals{display:grid;gap:8px;padding:16px 0 18px}
+.q-totals div{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.q-totals span{color:var(--muted);font-size:.9rem}
+.q-totals strong{font-family:var(--font-mono);font-size:1.15rem;font-weight:500;font-variant-numeric:tabular-nums}
+
+/* Services */
+.svc{display:grid;gap:22px;padding-top:56px;padding-bottom:56px;border-bottom:1px solid var(--line)}
+.svc:last-child{border-bottom:0}
+@media (min-width:920px){.svc{grid-template-columns:5fr 7fr;gap:64px;padding-top:80px;padding-bottom:80px}}
+.kicker{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.kicker::before{content:"";width:26px;height:3px;border-radius:2px;background:var(--accent)}
+.svc h2,.sb h2,.steps h2,.faq h2,.start h2{font-size:clamp(1.8rem,3.4vw,2.6rem)}
+.svc h2{margin:14px 0 22px}
+.price{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px}
+.price .big{font-family:var(--font-display);font-weight:800;font-size:clamp(3.2rem,7vw,4.6rem);line-height:.9;letter-spacing:-0.03em;color:var(--accent)}
+.price s{font-family:var(--font-mono);color:var(--muted);font-size:1.05rem}
+.price .unit{flex-basis:100%;color:var(--muted);font-size:.95rem}
+.svc-body{display:grid;gap:20px;align-content:start}
+.svc-body>p{font-size:1.075rem;max-width:60ch}
+.ticks{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+@media (min-width:600px){.ticks{grid-template-columns:1fr 1fr;gap:10px 28px}}
+.ticks li{position:relative;padding-left:28px}
+.ticks li::before{content:"";position:absolute;left:3px;top:.45em;width:11px;height:6px;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg)}
+.fine{font-size:.875rem;color:var(--muted);max-width:62ch}
+.fine a{color:var(--text)}
+.actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+
+/* Backend hosting */
+.sb{--accent:var(--brass);background:var(--bg);background:linear-gradient(180deg,rgba(226,179,84,.07) 0%,rgba(226,179,84,0) 70%),var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sb .wrap{padding-top:64px;padding-bottom:72px}
+.sb-head{display:grid;gap:16px;max-width:760px}
+.sb-mark{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:800;font-size:1.35rem;letter-spacing:-0.01em;color:var(--brass)}
+.sb-mark svg{width:26px;height:26px;flex:none}
+.sb-lead{color:var(--muted);font-size:1.075rem;max-width:62ch}
+.stack{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:4px 0 0;padding:0}
+.stack li{font-family:var(--font-mono);font-size:.78rem;border:1px solid rgba(226,179,84,.35);border-radius:999px;padding:5px 11px}
+.plans{display:grid;gap:16px;margin-top:36px}
+@media (min-width:880px){.plans{grid-template-columns:repeat(3,1fr)}}
+.plan{display:flex;flex-direction:column;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px}
+.plan-pro{border-color:rgba(226,179,84,.6);background:linear-gradient(180deg,rgba(226,179,84,.07),rgba(226,179,84,0)),var(--surface)}
+.plan h3{font-size:1.3rem}
+.plan-for{color:var(--muted);font-size:.925rem;margin-top:4px}
+.plan-price{display:flex;align-items:baseline;gap:2px;font-family:var(--font-display);font-weight:800;line-height:1}
+.plan-price .cur{font-size:1.4rem;align-self:flex-start;margin-top:5px}
+.plan-price .num{font-size:3.1rem;letter-spacing:-0.03em;font-variant-numeric:tabular-nums}
+.plan-price .per{font-family:var(--font-body);font-weight:500;font-size:.95rem;color:var(--muted);margin-left:8px}
+.specs{list-style:none;margin:0;padding:0;font-family:var(--font-mono);font-size:.84rem;color:var(--muted)}
+.specs li{padding:9px 0;border-top:1px dashed var(--line)}
+.specs b{color:var(--text);font-weight:500}
+.plan .btn{margin-top:auto}
+.sb-foot{margin-top:22px;color:var(--muted);font-size:.925rem}
+.sb-foot a{color:var(--brass);text-underline-offset:3px}
+.feat{margin-top:48px;padding-top:40px;border-top:1px solid var(--line)}
+.feat-head{display:grid;gap:8px;max-width:640px}
+.feat-head h3{font-size:clamp(1.4rem,2.6vw,1.9rem)}
+.feat-head p{color:var(--muted)}
+.feat-grid{margin-top:28px;column-gap:16px}
+@media (min-width:760px){.feat-grid{columns:2}}
+@media (min-width:1080px){.feat-grid{columns:3}}
+.feat-group{break-inside:avoid;margin:0 0 16px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px 6px}
+.feat-group h4{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 0 6px;font-family:var(--font-display);font-size:1.1rem;font-weight:700}
+.feat-group h4 span{font-family:var(--font-mono);font-size:.72rem;font-weight:400;color:var(--brass)}
+.feat-group ul{list-style:none;margin:0;padding:0}
+.feat-group li{display:grid;gap:2px;padding:10px 0;border-top:1px dashed var(--line)}
+.feat-group li b{font-weight:600;font-size:.95rem}
+.feat-group li span{color:var(--muted);font-size:.85rem}
+.addons{padding:18px 20px;border:1px dashed rgba(226,179,84,.45);border-radius:16px}
+.addons h4{margin:0 0 6px;font-family:var(--font-display);font-size:1.05rem;color:var(--brass)}
+.addons p{color:var(--muted);font-size:.925rem;max-width:80ch}
+
+/* Steps */
+.steps .wrap{padding-top:64px;padding-bottom:64px}
+.step-list{list-style:none;margin:32px 0 0;padding:0;display:grid;gap:28px}
+@media (min-width:640px){.step-list{grid-template-columns:1fr 1fr}}
+@media (min-width:1000px){.step-list{grid-template-columns:repeat(4,1fr)}}
+.step-list li{display:grid;gap:8px;align-content:start;padding-top:18px;border-top:1px solid var(--line)}
+.step-n{font-family:var(--font-display);font-weight:800;font-size:2rem;line-height:1;color:var(--muted)}
+.step-list h3{font-size:1.15rem;letter-spacing:0}
+.step-list p{color:var(--muted);font-size:.95rem}
+.pay{margin-top:36px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px;padding:18px 20px;background:var(--surface);border:1px solid var(--line);border-radius:16px}
+.pay>p{flex:1 1 240px}
+.pay-note{flex-basis:100%;color:var(--muted);font-size:.9rem}
+
+/* Questions */
+.faq{border-top:1px solid var(--line)}
+.faq .wrap{padding-top:64px;padding-bottom:64px}
+.faq-grid{display:grid;gap:28px;margin-top:32px}
+@media (min-width:760px){.faq-grid{grid-template-columns:1fr 1fr;gap:32px 56px}}
+.qa h3{font-size:1.075rem;letter-spacing:0;margin-bottom:8px}
+.qa p{color:var(--muted);max-width:58ch}
+
+/* Start form */
+.start{border-top:1px solid var(--line);background:linear-gradient(180deg,var(--bg),var(--surface))}
+.start .wrap{display:grid;gap:32px;padding-top:64px;padding-bottom:72px}
+@media (min-width:920px){.start .wrap{grid-template-columns:4fr 6fr;gap:64px}}
+.start-copy{display:grid;gap:14px;align-content:start}
+.start-copy p{color:var(--muted);max-width:46ch}
+.start-copy a{color:var(--text);text-underline-offset:3px}
+.panel{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:22px}
+.grid{display:grid;gap:16px}
+@media (min-width:600px){.two{grid-template-columns:1fr 1fr}}
+.field{display:grid;gap:7px}
+.field label,.legend{font-size:.875rem;font-weight:600;padding:0}
+.legend{margin-bottom:7px}
+.opt{color:var(--muted);font-weight:400}
+input[type=text],input[type=email],input[type=tel],select,textarea{width:100%;min-height:46px;padding:11px 13px;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:10px;font:inherit;font-size:1rem}
+textarea{min-height:120px;resize:vertical}
+input::placeholder,textarea::placeholder{color:#717888}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--text)}
+.invalid{border-color:var(--app) !important}
+.err{color:var(--app);font-size:.85rem;margin-top:8px}
+.needs{display:flex;flex-wrap:wrap;gap:8px}
+.needs input{position:absolute;opacity:0;width:1px;height:1px}
+.needs label{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 14px;border:1px solid var(--line);border-radius:999px;font-size:.925rem;font-weight:500;cursor:pointer}
+.needs label::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--dot,var(--muted))}
+.needs input:checked+label{border-color:var(--text);background:var(--surface)}
+.needs input:focus-visible+label{outline:2px solid var(--text);outline-offset:2px}
+.form-foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.form-foot .fine{max-width:30ch}
+.result h3{font-size:1.3rem}
+.result pre{margin:0;white-space:pre-wrap;word-break:break-word;font-family:var(--font-mono);font-size:.82rem;line-height:1.55;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;max-height:280px;overflow:auto}
+
+/* Footer */
+.foot{border-top:1px solid var(--line)}
+.foot .wrap{display:grid;gap:10px;padding-top:32px;padding-bottom:40px}
+@media (min-width:760px){.foot .wrap{grid-template-columns:auto 1fr auto;align-items:center;gap:24px}}
+.foot p{color:var(--muted);font-size:.875rem}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}.btn:hover{transform:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="ribbon" data-promo="on">
+  <div class="wrap">
+    <span>Launch offer: <b>websites built free</b> until <span data-promo-date-short>17 Feb 2027</span></span>
+    <span class="chip-days" id="days-left" hidden></span>
+    <a href="#start" data-need="website">Claim yours</a>
+  </div>
+</div>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2 20.5 7v10L12 21.8 3.5 17V7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M13.2 6.6 8.6 13h3.3l-1 4.4 4.6-6.4h-3.3z" fill="currentColor"/></svg>
+      Superbrass
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#websites">Websites</a>
+      <a href="#apps">Apps</a>
+      <a href="#backend">Backend</a>
+      <a href="#faq">Questions</a>
+    </nav>
+    <a class="btn btn-white btn-sm" href="#start"><span data-promo="on">Start free</span><span data-promo="off">Get started</span></a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Websites · Apps · Backend hosting</p>
+      <h1>Tell us what you want. We build it until you’re happy.</h1>
+      <p class="lede">
+        <span data-promo="on">Websites are <strong>free to build until <span data-promo-date>17 February 2027</span></strong>, then <span data-price="website">$150</span> each.</span>
+        <span data-promo="off">Websites are <strong><span data-price="website">$150</span> each</strong>.</span>
+        Apps go live on the App Store and Google Play for <strong><span data-price="app">$300</span></strong>. Backend hosting starts at <strong><span data-sb-money="starter">$35</span> a month</strong>.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-white" href="#start" data-need="website"><span data-promo="on">Claim my free website</span><span data-promo="off">Start my website</span></a>
+        <a class="btn btn-ghost" href="#start" data-need="app">Build my app</a>
+      </div>
+      <ul class="assure">
+        <li>Pay for a build only once you approve it</li>
+        <li>Secure checkout by Stripe</li>
+        <li>Prices in AUD</li>
+      </ul>
+    </div>
+
+    <aside class="quote" aria-labelledby="quote-title">
+      <div class="quote-head"><h2 id="quote-title">Build your quote</h2><span>AUD</span></div>
+      <label class="q-line" for="q-web" style="--accent:var(--web)">
+        <input type="checkbox" id="q-web" checked>
+        <span class="q-name">Website<small data-promo="on">Free to build until <span data-promo-date-short>17 Feb 2027</span></small><small data-promo="off">Per website</small></span>
+        <span class="q-price"><span data-promo="on"><s><span class="sr">was </span><span data-price="website">$150</span></s>$0</span><span data-promo="off" data-price="website">$150</span></span>
+      </label>
+      <label class="q-line" for="q-app" style="--accent:var(--app)">
+        <input type="checkbox" id="q-app" checked>
+        <span class="q-name">App<small>iPhone and Android, published to both stores</small></span>
+        <span class="q-price" data-price="app">$300</span>
+      </label>
+      <fieldset class="q-sb">
+        <legend>Backend hosting</legend>
+        <div class="seg">
+          <input type="radio" name="q-sb" id="q-sb-none" value="none"><label for="q-sb-none">None<span>$0</span></label>
+          <input type="radio" name="q-sb" id="q-sb-starter" value="starter"><label for="q-sb-starter">Starter<span data-sb-money="starter">$35</span></label>
+          <input type="radio" name="q-sb" id="q-sb-pro" value="pro" checked><label for="q-sb-pro">Pro<span data-sb-money="pro">$71</span></label>
+          <input type="radio" name="q-sb" id="q-sb-team" value="team"><label for="q-sb-team">Team<span data-sb-money="team">$892</span></label>
+        </div>
+      </fieldset>
+      <div class="q-totals" aria-live="polite">
+        <div><span>Builds, paid when you approve</span><strong id="q-once">$300</strong></div>
+        <div><span>Backend hosting, every month</span><strong id="q-month">$71/mo</strong></div>
+      </div>
+      <a class="btn btn-white btn-block" href="#start" id="q-go">Start with this quote</a>
+    </aside>
+  </div>
+</section>
+
+<section class="services" aria-label="What we build">
+  <div class="wrap">
+    <article class="svc" id="websites" style="--accent:var(--web)">
+      <div>
+        <p class="kicker">Websites</p>
+        <h2 data-promo="on">A website built for you, free until <span data-promo-date>17 February 2027</span>.</h2>
+        <h2 data-promo="off">A website built for you, <span data-price="website">$150</span> flat.</h2>
+        <div class="price" data-promo="on"><span class="big">$0</span><s><span class="sr">usually </span><span data-price="website">$150</span></s><span class="unit">per website during the launch offer, then <span data-price="website">$150</span></span></div>
+        <div class="price" data-promo="off"><span class="big" data-price="website">$150</span><span class="unit">per website</span></div>
+      </div>
+      <div class="svc-body">
+        <p>Tell us about your business and the look you like. We design and build the site, send you a preview link, and keep changing it until you’re happy.</p>
+        <ul class="ticks">
+          <li>Custom design for your brand</li>
+          <li>Fast on phones, tablets and computers</li>
+          <li>Contact form and map</li>
+          <li>Changes until you’re happy</li>
+        </ul>
+        <p class="fine">Domain names and hosting are separate from the build price. We show you the options before you pay for anything.</p>
+        <div class="actions">
+          <a class="btn btn-accent" href="#start" data-need="website"><span data-promo="on">Claim my free website</span><span data-promo="off">Start my website</span></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="svc" id="apps" style="--accent:var(--app)">
+      <div>
+        <p class="kicker">Apps</p>
+        <h2>Your app on the App Store and Google Play.</h2>
+        <div class="price"><span class="big" data-price="app">$300</span><span class="unit">per app, iPhone and Android included</span></div>
+      </div>
+      <div class="svc-body">
+        <p>Describe the app you want. We build it, send you a test version to try on your own phone, and keep improving it until you’re happy. Then we publish it to both stores.</p>
+        <ul class="ticks">
+          <li>iPhone and Android from one build</li>
+          <li>Test it on your phone before launch</li>
+          <li>Changes until you’re happy</li>
+          <li>We handle both store submissions</li>
+          <li>Published in your name, so you own it</li>
+        </ul>
+        <p class="fine">Apple charges A$149 a year and Google a one time US$25 for the developer accounts your app is published under. Those fees go straight to them. Need logins or a database? <a href="#backend">Add backend hosting</a> from <span data-sb-money="starter">$35</span> a month.</p>
+        <div class="actions">
+          <a class="btn btn-accent" href="#start" data-need="app">Build my app</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sb" id="backend" aria-labelledby="sb-title">
+  <div class="wrap">
+    <div class="sb-head">
+      <p class="kicker">Backend</p>
+      <h2 id="sb-title">Hosting for your app’s database, logins and files.</h2>
+      <p class="sb-lead">A Postgres database, user logins, file storage, realtime and serverless functions. We set it up, connect it to your app and bill you monthly through Stripe.</p>
+      <ul class="stack" aria-label="Included on every plan">
+        <li>Postgres database</li><li>User logins</li><li>File storage</li><li>Realtime</li><li>Serverless functions</li><li>Instant APIs</li>
+      </ul>
+    </div>
+    <div class="plans">
+      <article class="plan">
+        <div><h3>Starter</h3><p class="plan-for">For small sites and new apps</p></div>
+        <p class="plan-price"><span class="cur">$</span><span class="num" data-sb="starter">35</span><span class="per">a month</span></p>
+        <ul class="specs">
+          <li><b>500 MB</b> database</li>
+          <li><b>1 GB</b> file storage</li>
+          <li><b>5 GB</b> bandwidth</li>
+          <li><b>50,000</b> monthly active users</li>
+        </ul>
+        <a class="btn btn-line" href="https://buy.stripe.com/3cIaEZcfj0Yo6MB0Wm0Ba02" data-sub="starter">Subscribe</a>
+      </article>
+      <article class="plan plan-pro">
+        <div><h3>Pro</h3><p class="plan-for">For apps with real users</p></div>
+        <p class="plan-price"><span class="cur">$</span><span class="num" data-sb="pro">71</span><span class="per">a month</span></p>
+        <ul class="specs">
+          <li><b>8 GB</b> database</li>
+          <li><b>100 GB</b> file storage</li>
+          <li><b>250 GB</b> bandwidth</li>
+          <li><b>100,000</b> monthly active users</li>
+          <li><b>Daily</b> backups, kept 7 days</li>
+        </ul>
+        <a class="btn btn-accent" href="https://buy.stripe.com/28EfZjbbf7mM1shdJ80Ba03" data-sub="pro">Subscribe</a>
+      </article>
+      <article class="plan">
+        <div><h3>Team</h3><p class="plan-for">For bigger teams and traffic</p></div>
+        <p class="plan-price"><span class="cur">$</span><span class="num" data-sb="team">892</span><span class="per">a month</span></p>
+        <ul class="specs">
+          <li>Everything in <b>Pro</b></li>
+          <li><b>Daily</b> backups, kept 14 days</li>
+          <li><b>Priority</b> support</li>
+        </ul>
+        <a class="btn btn-line" href="https://buy.stripe.com/cNi3cxenr7mMb2R6gG0Ba04" data-sub="team">Subscribe</a>
+      </article>
+    </div>
+    <p class="sb-foot">Need more than Team? <a href="#start" data-need="superbrass">Ask us for a custom plan.</a> Prices in AUD, billed monthly.</p>
+
+    <div class="feat" id="features" aria-labelledby="feat-title">
+      <div class="feat-head">
+        <h3 id="feat-title">Everything included</h3>
+        <p>Every plan gets the full toolkit. Plans differ only in size, backups and support.</p>
+      </div>
+      <div class="feat-grid">
+        <section class="feat-group" aria-labelledby="fg-db">
+          <h4 id="fg-db">Database <span>12 features</span></h4>
+          <ul>
+            <li><b>Postgres database</b><span>A full Postgres database for every project</span></li>
+            <li><b>Instant REST API</b><span>Endpoints made from your tables automatically</span></li>
+            <li><b>Instant GraphQL API</b><span>Query your data with GraphQL straight away</span></li>
+            <li><b>Vector database</b><span>Store AI embeddings next to your data for smart search</span></li>
+            <li><b>Row level security</b><span>Rules that decide who can see and change each row</span></li>
+            <li><b>Functions and triggers</b><span>Run logic inside the database when data changes</span></li>
+            <li><b>Postgres extensions</b><span>Add maps, geolocation and dozens more abilities</span></li>
+            <li><b>Full text search</b><span>Fast search across all your content</span></li>
+            <li><b>Scheduled jobs</b><span>Run tasks every minute, hour or day</span></li>
+            <li><b>Queues</b><span>Process background work reliably</span></li>
+            <li><b>Database webhooks</b><span>Send changes to other services as they happen</span></li>
+            <li><b>Encrypted secrets</b><span>Keep API keys and private values encrypted</span></li>
+          </ul>
+        </section>
+        <section class="feat-group" aria-labelledby="fg-auth">
+          <h4 id="fg-auth">Logins <span>8 features</span></h4>
+          <ul>
+            <li><b>Email and password</b><span>Sign ups, logins and password resets</span></li>
+            <li><b>Magic links</b><span>Passwordless login by email</span></li>
+            <li><b>Phone logins</b><span>One time codes sent by SMS</span></li>
+            <li><b>Social logins</b><span>Google, Apple, Facebook, GitHub and more</span></li>
+            <li><b>Two factor login</b><span>Extra security with an authenticator app</span></li>
+            <li><b>Single sign on</b><span>SAML logins for companies</span></li>
+            <li><b>CAPTCHA protection</b><span>Keeps bots out of your sign up forms</span></li>
+            <li><b>Auth hooks</b><span>Customise what happens when people sign up or log in</span></li>
+          </ul>
+        </section>
+        <section class="feat-group" aria-labelledby="fg-storage">
+          <h4 id="fg-storage">Storage <span>5 features</span></h4>
+          <ul>
+            <li><b>File storage</b><span>Upload and serve images, video and documents</span></li>
+            <li><b>Image resizing</b><span>Resize and crop images on the fly</span></li>
+            <li><b>Resumable uploads</b><span>Big files upload reliably, even on mobile</span></li>
+            <li><b>S3 compatible</b><span>Works with any tool that supports S3</span></li>
+            <li><b>Access rules</b><span>Control who can view and upload each file</span></li>
+          </ul>
+        </section>
+        <section class="feat-group" aria-labelledby="fg-rt">
+          <h4 id="fg-rt">Realtime <span>3 features</span></h4>
+          <ul>
+            <li><b>Live data</b><span>Apps update the moment your database changes</span></li>
+            <li><b>Broadcast</b><span>Send messages between users instantly</span></li>
+            <li><b>Presence</b><span>Show who is online and who is typing</span></li>
+          </ul>
+        </section>
+        <section class="feat-group" aria-labelledby="fg-fn">
+          <h4 id="fg-fn">Edge functions <span>3 features</span></h4>
+          <ul>
+            <li><b>Serverless functions</b><span>Run TypeScript code without managing servers</span></li>
+            <li><b>NPM packages</b><span>Use the packages you already know</span></li>
+            <li><b>Regional runs</b><span>Run code close to your database</span></li>
+          </ul>
+        </section>
+        <section class="feat-group" aria-labelledby="fg-tools">
+          <h4 id="fg-tools">Tools <span>3 features</span></h4>
+          <ul>
+            <li><b>Dashboard</b><span>Table editor, SQL editor and user management</span></li>
+            <li><b>Client libraries</b><span>JavaScript, Flutter, Swift, Kotlin, Python and C#</span></li>
+            <li><b>Command line tools</b><span>Build locally, then deploy in one step</span></li>
+          </ul>
+        </section>
+      </div>
+      <div class="addons">
+        <h4>Available on request</h4>
+        <p>Point in time recovery, read replicas, a custom domain for your API, preview branches, log drains, IP restrictions and bigger servers. These are priced separately, and so are the text messages sent for phone logins.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="steps" id="how" aria-labelledby="how-title">
+  <div class="wrap">
+    <h2 id="how-title">How a build works</h2>
+    <ol class="step-list">
+      <li><span class="step-n">1</span><h3>Tell us what you want</h3><p>Fill in the form below. A few lines is enough to start.</p></li>
+      <li><span class="step-n">2</span><h3>We build a preview</h3><p>You get a link to your website, or a test version of your app for your phone.</p></li>
+      <li><span class="step-n">3</span><h3>Changes until you’re happy</h3><p>Tell us what to change. We keep going until you approve it.</p></li>
+      <li><span class="step-n">4</span><h3>Pay and go live</h3><p>Pay through Stripe’s secure checkout, then we launch your site or publish your app.</p></li>
+    </ol>
+    <div class="pay">
+      <p><strong>Approved your build?</strong> Pay securely with Stripe.</p>
+      <a class="btn btn-ghost" href="https://buy.stripe.com/4gM4gB5QVgXm5Ix0Wm0Ba00" data-pay="website" data-promo="off"><span>Pay for my website, <span data-price="website">$150</span></span></a>
+      <a class="btn btn-ghost" href="https://buy.stripe.com/28EbJ33INayY0odeNc0Ba01" data-pay="app"><span>Pay for my app, <span data-price="app">$300</span></span></a>
+      <p class="pay-note" id="pay-note" hidden>Payment opens once you approve your build. We’ll email you a secure Stripe link.</p>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq" aria-labelledby="faq-title">
+  <div class="wrap">
+    <h2 id="faq-title">Questions</h2>
+    <div class="faq-grid">
+      <div class="qa" data-promo="on"><h3>Is the website really free?</h3><p>Yes. Order your website by <span data-promo-date>17 February 2027</span> and we build it for free. After that it’s <span data-price="website">$150</span> per website.</p></div>
+      <div class="qa"><h3>When do I pay for a build?</h3><p>When you’re happy with it. You approve the preview, pay through Stripe, and then we go live.</p></div>
+      <div class="qa"><h3>Who owns my app?</h3><p>You do. It’s published under your own Apple and Google developer accounts. Apple charges A$149 a year and Google a one time US$25, and we help you set up both.</p></div>
+      <div class="qa"><h3>What does backend hosting include?</h3><p>The full toolkit listed under <a href="#features">Everything included</a>: a Postgres database with instant APIs, logins, file storage, realtime and edge functions. We set it up for you and bill it monthly.</p></div>
+      <div class="qa"><h3>Are domains and hosting included?</h3><p>Not in the build price. We can register a domain for you or connect one you already own, and we show you the costs first.</p></div>
+      <div class="qa"><h3>Is paying online safe?</h3><p>Every payment goes through Stripe’s secure checkout. We never see your card details.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="start" id="start" aria-labelledby="start-title">
+  <div class="wrap">
+    <div class="start-copy">
+      <h2 id="start-title">Tell us what you need</h2>
+      <p>A few lines is enough. We reply with questions and a plan, and you only pay for a build once you approve it.</p>
+      <p id="email-line" hidden>Prefer email? Write to <a data-email href="#start"></a></p>
+    </div>
+    <div>
+      <form class="panel" id="start-form" novalidate>
+        <div class="grid">
+          <div class="grid two">
+            <div class="field"><label for="f-name">Your name</label><input type="text" id="f-name" name="name" autocomplete="name" required></div>
+            <div class="field"><label for="f-email">Email</label><input type="email" id="f-email" name="email" autocomplete="email" required></div>
+          </div>
+          <div class="grid two">
+            <div class="field"><label for="f-phone">Phone <span class="opt">(optional)</span></label><input type="tel" id="f-phone" name="phone" autocomplete="tel"></div>
+            <div class="field"><label for="f-business">Business or project name</label><input type="text" id="f-business" name="business" autocomplete="organization"></div>
+          </div>
+          <fieldset aria-describedby="need-err">
+            <legend class="legend">What do you need?</legend>
+            <div class="needs">
+              <input type="checkbox" id="need-website" name="need" value="Website"><label for="need-website" style="--dot:var(--web)">Website</label>
+              <input type="checkbox" id="need-app" name="need" value="App"><label for="need-app" style="--dot:var(--app)">App</label>
+              <input type="checkbox" id="need-superbrass" name="need" value="Backend hosting"><label for="need-superbrass" style="--dot:var(--brass)">Backend hosting</label>
+              <input type="checkbox" id="need-unsure" name="need" value="Not sure yet"><label for="need-unsure">Not sure yet</label>
+            </div>
+            <p class="err" id="need-err" hidden>Pick at least one.</p>
+          </fieldset>
+          <div class="field" id="plan-field" hidden>
+            <label for="f-plan">Backend plan</label>
+            <select id="f-plan" name="plan">
+              <option value="starter">Starter, $35 a month</option>
+              <option value="pro" selected>Pro, $71 a month</option>
+              <option value="team">Team, $892 a month</option>
+              <option value="unsure">Not sure yet</option>
+            </select>
+          </div>
+          <div class="field"><label for="f-brief">Tell us about it</label><textarea id="f-brief" name="brief" required placeholder="What should it do, who is it for, and what pages or screens do you need?"></textarea></div>
+          <div class="field"><label for="f-examples">Sites or apps you like <span class="opt">(optional)</span></label><input type="text" id="f-examples" name="examples" placeholder="Paste a link or two"></div>
+          <div class="form-foot">
+            <p class="fine">We reply by email with next steps.</p>
+            <button class="btn btn-white" type="submit" id="f-submit">Continue to email</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="panel result" id="form-result" hidden tabindex="-1">
+        <div class="grid">
+          <h3 id="r-title">Your request is ready to send</h3>
+          <p class="fine" id="r-msg"></p>
+          <div class="actions">
+            <a class="btn btn-white" id="r-mail" href="#start">Open email</a>
+            <button class="btn btn-ghost" type="button" id="r-copy">Copy request</button>
+            <button class="btn btn-ghost" type="button" id="r-edit">Edit</button>
+          </div>
+          <pre id="r-text"></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2 20.5 7v10L12 21.8 3.5 17V7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M13.2 6.6 8.6 13h3.3l-1 4.4 4.6-6.4h-3.3z" fill="currentColor"/></svg>
+      Superbrass
+    </a>
+    <p>Websites, apps and backend hosting.</p>
+    <p>All prices in Australian dollars. Payments by Stripe. © 2026 Superbrass</p>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   CONFIG: everything you would change lives here.
+   ===================================================================== */
+const CONFIG = {
+  // The inbox customer requests go to. While blank, the form lets people copy their request instead.
+  contactEmail: "",
+
+  // Optional: a URL that accepts a JSON POST (for example a serverless function).
+  // Leave it blank and the form hands the customer a ready-made email instead.
+  formEndpoint: "",
+
+  // Websites ordered up to and including this date (Sydney time) are built free.
+  // After it, the page switches to $150 by itself.
+  promoEnds: "2027-02-17",
+
+  websitePrice: 150,   // AUD per website after the launch offer
+  appPrice: 300,       // AUD per app, iPhone and Android
+
+  // Backend hosting plans, AUD per month. Keep these the same as the Stripe prices.
+  backendPlans: { starter: 35, pro: 71, team: 892 },
+
+  // Paste your Stripe Payment Links (https://buy.stripe.com/...) here.
+  // Make sure each Stripe price matches what this page shows.
+  stripeLinks: {
+    website: "https://buy.stripe.com/4gM4gB5QVgXm5Ix0Wm0Ba00", // Website build, A$150 once
+    app:     "https://buy.stripe.com/28EbJ33INayY0odeNc0Ba01", // App build, A$300 once
+    starter: "https://buy.stripe.com/3cIaEZcfj0Yo6MB0Wm0Ba02", // Superbrass Starter, A$35 a month
+    pro:     "https://buy.stripe.com/28EfZjbbf7mM1shdJ80Ba03", // Superbrass Pro, A$71 a month
+    team:    "https://buy.stripe.com/cNi3cxenr7mMb2R6gG0Ba04"  // Superbrass Team, A$892 a month
+  }
+};
+
+(function () {
+  "use strict";
+  const $ = (s, el = document) => el.querySelector(s);
+  const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
+  const money = n => "$" + Number(n).toLocaleString("en-AU");
+
+  /* Backend plan prices */
+  const SB = Object.assign({}, CONFIG.backendPlans);
+  const PLAN = { starter: "Starter", pro: "Pro", team: "Team" };
+
+  /* Launch offer: compare Sydney's date with the end date */
+  const parts = new Intl.DateTimeFormat("en-AU", { timeZone: "Australia/Sydney", year: "numeric", month: "numeric", day: "numeric" }).formatToParts(new Date());
+  const part = t => Number(parts.find(p => p.type === t).value);
+  const today = Date.UTC(part("year"), part("month") - 1, part("day")) / 86400000;
+  const [py, pm, pd] = CONFIG.promoEnds.split("-").map(Number);
+  const daysLeft = Date.UTC(py, pm - 1, pd) / 86400000 - today;
+  const promo = daysLeft >= 0;
+  document.documentElement.classList.toggle("promo-on", promo);
+  document.documentElement.classList.toggle("promo-off", !promo);
+
+  const endDate = new Date(Date.UTC(py, pm - 1, pd, 12));
+  const longDate = endDate.toLocaleDateString("en-AU", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+  const shortDate = endDate.toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+  $$("[data-promo-date]").forEach(el => { el.textContent = longDate; });
+  $$("[data-promo-date-short]").forEach(el => { el.textContent = shortDate; });
+  const chip = $("#days-left");
+  if (promo && chip) {
+    chip.textContent = daysLeft === 0 ? "Last day" : daysLeft === 1 ? "1 day left" : daysLeft + " days left";
+    chip.hidden = false;
+  }
+
+  /* Fill every price from CONFIG */
+  $$("[data-price]").forEach(el => { el.textContent = money(el.dataset.price === "app" ? CONFIG.appPrice : CONFIG.websitePrice); });
+  $$("[data-sb]").forEach(el => { el.textContent = SB[el.dataset.sb].toLocaleString("en-AU"); });
+  $$("[data-sb-money]").forEach(el => { el.textContent = money(SB[el.dataset.sbMoney]); });
+  $$("#f-plan option").forEach(o => { if (SB[o.value] != null) o.textContent = PLAN[o.value] + ", " + money(SB[o.value]) + " a month"; });
+  if (CONFIG.contactEmail) {
+    $$("[data-email]").forEach(a => { a.href = "mailto:" + CONFIG.contactEmail; a.textContent = CONFIG.contactEmail; });
+    $("#email-line").hidden = false;
+  }
+
+  /* Form helpers */
+  const form = $("#start-form");
+  const result = $("#form-result");
+  const needErr = $("#need-err");
+  const planField = $("#plan-field");
+  const planSel = $("#f-plan");
+  const needBox = v => $("#need-" + v);
+  const syncPlan = () => { planField.hidden = !needBox("superbrass").checked; };
+  function showForm() { result.hidden = true; form.hidden = false; }
+  function preselect(need, plan) {
+    showForm();
+    const box = needBox(need);
+    if (box) box.checked = true;
+    if (plan && planSel.querySelector('option[value="' + plan + '"]')) planSel.value = plan;
+    syncPlan();
+    needErr.hidden = true;
+  }
+  $$("[data-need]").forEach(a => a.addEventListener("click", () => preselect(a.dataset.need)));
+  needBox("superbrass").addEventListener("change", syncPlan);
+
+  /* Stripe: subscriptions and build payments */
+  $$("[data-sub]").forEach(a => {
+    const key = a.dataset.sub;
+    const link = CONFIG.stripeLinks[key];
+    if (link) { a.href = link; a.textContent = "Subscribe"; }
+    else a.addEventListener("click", () => preselect("superbrass", key));
+  });
+  const payNote = $("#pay-note");
+  $$("[data-pay]").forEach(a => {
+    const link = CONFIG.stripeLinks[a.dataset.pay];
+    if (link) a.href = link;
+    else a.addEventListener("click", e => { e.preventDefault(); payNote.hidden = false; });
+  });
+
+  /* Quote card */
+  const qWeb = $("#q-web");
+  const qApp = $("#q-app");
+  const qPlan = () => { const r = $('input[name="q-sb"]:checked'); return r ? r.value : "none"; };
+  function quote() {
+    const web = qWeb.checked ? (promo ? 0 : CONFIG.websitePrice) : 0;
+    const app = qApp.checked ? CONFIG.appPrice : 0;
+    const plan = qPlan();
+    return { web: qWeb.checked, app: qApp.checked, plan: plan, once: web + app, monthly: plan === "none" ? 0 : SB[plan] };
+  }
+  function renderQuote() {
+    const q = quote();
+    $("#q-once").textContent = money(q.once);
+    $("#q-month").textContent = q.monthly ? money(q.monthly) + "/mo" : "$0";
+  }
+  [qWeb, qApp].concat($$('input[name="q-sb"]')).forEach(el => el.addEventListener("change", renderQuote));
+  renderQuote();
+
+  let quoteNote = "";
+  $("#q-go").addEventListener("click", () => {
+    const q = quote();
+    showForm();
+    ["website", "app", "superbrass", "unsure"].forEach(n => { needBox(n).checked = false; });
+    if (q.web) needBox("website").checked = true;
+    if (q.app) needBox("app").checked = true;
+    if (q.plan !== "none") { needBox("superbrass").checked = true; planSel.value = q.plan; }
+    if (!q.web && !q.app && q.plan === "none") needBox("unsure").checked = true;
+    syncPlan();
+    needErr.hidden = true;
+    quoteNote = "Builds " + money(q.once) + " on approval" + (q.monthly ? ", Backend " + PLAN[q.plan] + " " + money(q.monthly) + "/mo" : "");
+  });
+
+  /* Request form */
+  const f = {
+    name: $("#f-name"), email: $("#f-email"), phone: $("#f-phone"),
+    business: $("#f-business"), brief: $("#f-brief"), examples: $("#f-examples")
+  };
+  const submitBtn = $("#f-submit");
+  const submitLabel = CONFIG.formEndpoint ? "Send my request" : CONFIG.contactEmail ? "Continue to email" : "Continue";
+  submitBtn.textContent = submitLabel;
+  [f.name, f.email, f.brief].forEach(el => el.addEventListener("input", () => el.classList.remove("invalid")));
+  $$('input[name="need"]').forEach(el => el.addEventListener("change", () => { needErr.hidden = true; }));
+
+  function summary(d) {
+    const out = ["Name: " + d.name, "Email: " + d.email];
+    if (d.phone) out.push("Phone: " + d.phone);
+    if (d.business) out.push("Business: " + d.business);
+    out.push("Needs: " + d.needs.join(", "));
+    if (d.plan) out.push("Backend plan: " + d.plan);
+    if (d.quote) out.push("Quote: " + d.quote);
+    out.push("", d.brief);
+    if (d.examples) out.push("", "Examples: " + d.examples);
+    return out.join("\n");
+  }
+
+  function showResult(d, text, sent, failed) {
+    const subject = "Build request from " + (d.business || d.name);
+    $("#r-text").textContent = text;
+    $("#r-mail").href = "mailto:" + CONFIG.contactEmail + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(text);
+    $("#r-mail").hidden = sent || !CONFIG.contactEmail;
+    $("#r-copy").hidden = sent;
+    $("#r-text").hidden = sent;
+    if (sent) {
+      $("#r-title").textContent = "Thanks, " + d.name.split(" ")[0] + ". We’ve got your request.";
+      $("#r-msg").textContent = "We’ll reply to " + d.email + " with next steps.";
+      $("#r-edit").textContent = "Send another";
+    } else {
+      $("#r-title").textContent = failed ? "We couldn’t send that automatically" : "Your request is ready to send";
+      $("#r-msg").textContent = CONFIG.contactEmail
+        ? "Use Open email to send it to " + CONFIG.contactEmail + ", or copy it into any email. We’ll reply with next steps."
+        : "Copy your request below and send it to us. We’ll reply with next steps.";
+      $("#r-edit").textContent = "Edit";
+    }
+    form.hidden = true;
+    result.hidden = false;
+    result.focus();
+  }
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    let first = null;
+    const check = (el, ok) => { el.classList.toggle("invalid", !ok); if (!ok && !first) first = el; };
+    check(f.name, f.name.value.trim() !== "");
+    check(f.email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim()));
+    const needs = $$('input[name="need"]:checked').map(i => i.value);
+    needErr.hidden = needs.length > 0;
+    if (!needs.length && !first) first = needBox("website");
+    check(f.brief, f.brief.value.trim() !== "");
+    if (first) { first.focus(); return; }
+
+    const d = {
+      name: f.name.value.trim(), email: f.email.value.trim(), phone: f.phone.value.trim(),
+      business: f.business.value.trim(), needs: needs,
+      plan: needBox("superbrass").checked ? planSel.options[planSel.selectedIndex].text : "",
+      brief: f.brief.value.trim(), examples: f.examples.value.trim(), quote: quoteNote
+    };
+    const text = summary(d);
+    let failed = false;
+    if (CONFIG.formEndpoint) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending…";
+      try {
+        const res = await fetch(CONFIG.formEndpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(Object.assign({}, d, { summary: text, sentAt: new Date().toISOString() }))
+        });
+        if (res.ok) { showResult(d, text, true, false); return; }
+        failed = true;
+      } catch (err) {
+        failed = true;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = submitLabel;
+      }
+    }
+    showResult(d, text, false, failed);
+  });
+
+  $("#r-edit").addEventListener("click", () => { showForm(); f.name.focus(); });
+  $("#r-copy").addEventListener("click", async () => {
+    const btn = $("#r-copy");
+    try {
+      await navigator.clipboard.writeText($("#r-text").textContent);
+      btn.textContent = "Copied";
+    } catch (err) {
+      const range = document.createRange();
+      range.selectNodeContents($("#r-text"));
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      btn.textContent = "Selected, now copy it";
+    }
+    setTimeout(() => { btn.textContent = "Copy request"; }, 2500);
+  });
+
+  /* Star field behind the hero, drawn once per size */
+  const canvas = $("#stars");
+  if (canvas && canvas.getContext) {
+    const ctx = canvas.getContext("2d");
+    const draw = () => {
+      const r = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(r.width * dpr);
+      canvas.height = Math.round(r.height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, r.width, r.height);
+      let seed = 20261117;
+      const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+      const count = Math.round((r.width * r.height) / 8500);
+      for (let i = 0; i < count; i++) {
+        const x = rnd() * r.width, y = rnd() * r.height, s = rnd() * 1.1 + 0.3, a = rnd() * 0.5 + 0.12;
+        ctx.fillStyle = "rgba(244,245,247," + a.toFixed(2) + ")";
+        ctx.beginPath();
+        ctx.arc(x, y, s, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    };
+    draw();
+    let t;
+    window.addEventListener("resize", () => { clearTimeout(t); t = setTimeout(draw, 150); });
+  }
+})();
+</script>
+</body>
+</html>
